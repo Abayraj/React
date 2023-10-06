@@ -26,8 +26,9 @@ function App() {
     //dark/Light
     setUserName("useEffect");
 
-
+    
   },[]);
+  
   //use effect is like onload in javascript
   //this bracket is called dependency so some time if we do state update if  dont put this bracket it will go to infinity loop 
 
