@@ -1,25 +1,21 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect } from "react";
 
-export const Title =({ name }) =>{
-    useEffect(()=>{
-    let intreval =   setInterval(()=>{
-        console.log("fetching data")
-        
-       },1000)
+export const Title = () => {
+  useEffect(() => {
+    let interval = setInterval(() => {
+        console.log("mount");
+      console.log("fetching data");
+    }, 1000);
 
-        return()=>{
-            let intreval = clearInterval(intreval)
-        }
+    return () => {
+      clearInterval(interval); // Clear the interval when the component unmounts
+      console.log("unmount");
+    };
+  }, []); // An empty dependency array ensures that the effect runs only once (on mount)
 
-    },[]);//dependancy array if not put this array it will again try to trigger this useEffect
-
-
-    return(
-        <div>
-            <h1>Welcome back </h1>
-        </div>
-    )
-
-
-
-}
+  return (
+    <div>
+      <h1>Welcome back</h1>
+    </div>
+  );
+};
