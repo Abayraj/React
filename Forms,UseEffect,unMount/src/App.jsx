@@ -55,16 +55,16 @@ function App() {
           {/* if need to select multiple radio button need  to give differnt name in name filed here name filed have same name because we only need to select one gender */}
           <input type='radio' name='gender' value="female" id='female' onChange={handelChange}/>
           <label  htmlFor='female'>Female</label>
-         
          </div>
          <div>
          <label htmlFor="">Country</label>
-          <select name='country' id=''  onChange={handelChange}>
+          <select name='country'   onChange={handelChange}>
             <option value="">Select</option>
             <option value="UAE">UAE</option>
             <option value="india">INDIA</option>
           </select>
          </div>
+        
         
        
           <button type="submit">submit</button>
