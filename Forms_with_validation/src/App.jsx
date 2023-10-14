@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css';
 
 function App() {
+  //multiple table data store in object format
   // const [count, setCount] = useState(0)
   // const[formData,formDataChange]=useState({
   //   firstname : "",
@@ -30,17 +31,74 @@ function App() {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [country, setcountry] = useState('');
+  const [gender,setgender] = useState('');
+  const [checkedSkills,setSkills] = useState([]);//For storing multiple values
+
+  
+
+  
 
   //states to check the validation error
   const [userNameError, setUserNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [countryError, setCountryError] = useState('');
+  const [genderError,setgenderError] = useState('');
+  const [skillsError,setSkillsError] = useState('');  
 
+
+
+//Function to validate skills 
+ 
+ const handelChange = (event) =>{
+  const {value,checked} = event.target
+  if(checked){
+    setSkills(prev=>[...prev,value])
+  }
+  else{
+    setSkills(prev =>(
+      
+      [...prev.filter(skills=>skills!==value)]
+      // so the value contains the unchecked value and it checks with the array copy if array copy is eqaul to the value it will not return that value in filter ; 
+     
+    ));
+  };
+
+};
+function validateSkills(checkedSkills) {
+  let isSkillsValid = false;
+  setSkillsError('');
+
+  // Check if the array contains any of the specified skills
+  if (checkedSkills.includes("javascript") || checkedSkills.includes("python") || checkedSkills.includes("c++")) {
+    isSkillsValid = true;
+  } else {
+    setSkillsError("Please select valid skills");
+  }
+
+  console.log(isSkillsValid, "is skills valid");
+  return isSkillsValid;
+}
+
+  //Function to check gender 
+    function validateGender(gender){
+      let isgenderValid = true;
+      setgenderError('');
+  if(gender ==="male"|| gender ==="female"){
+    setgenderError("");
+    
+    return isgenderValid;
+  }else{
+    setgenderError('please select your gender');
+    isgenderValid=false;
+    return isgenderValid;
+  }
+  
+}
   //Function to validate the userName
 
   function validateUserName(userName) {
     let isUserNameValid = true;
-    const nameRegex = /^[a-zA-Z0-9]+$/;
+    const nameRegex = /^[a-zA-Z\-]+$/;;
     setUserNameError('');
     if (!nameRegex.test(userName)) {
       setUserNameError('username can not contain special characters')
@@ -68,7 +126,7 @@ function App() {
       return isEmailValid;
     }
     if (!emailRegrex.test(email)) {
-      setEmailError('The Email address is invalid')
+      setEmailError('The Email address is invalid');
       isEmailValid = false;
       return isEmailValid;
     }
@@ -76,42 +134,51 @@ function App() {
 
   }
 
-//function to vlaidate the country selection
- 
-function validateCountry(country){
-  setCountryError('');
-  let isCountryValid =  true;
-  if(country === 'INDIA' || country ==="UAE" || country ==="AMERICA"||country ==='RUSSIA'){
+  //function to vlaidate the country selection
+
+  function validateCountry(country) {
     setCountryError('');
+    let isCountryValid = true;
+    if (country === 'INDIA' || country === "UAE" || country === "AMERICA" || country === 'RUSSIA') {
+      setCountryError('');
 
+    }
+    else {
+      isCountryValid = false;
+      setCountryError("please choose country")
+
+    }
+
+    return isCountryValid;
   }
-  else{
-    isCountryValid = false;
-    setCountryError("please choose country")
-
-  }
-
-  return isCountryValid;
-}
 
 
   function handelsubmit(event) {
     event.preventDefault();
 
     let NameValid = validateUserName(userName);
-    let emailValid =validateEmail(email);
+    let emailValid = validateEmail(email);
     let countryValid = validateCountry(country);
+    let genderValid = validateGender(gender);
+    let SkillsValid = validateSkills(checkedSkills);
 
-    if(NameValid && emailValid && countryValid ){
+  
+    
+
+    if (NameValid && emailValid && countryValid && genderValid && SkillsValid) {
       console.log(`username:${userName}`);
-    console.log(`Email:${email}`);
-    console.log(`country:${country}`);
+      console.log(`Email:${email}`);
+      console.log(`country:${country}`);
+      console.log(`gender${gender}`);
+      console.log(`skills${checkedSkills}`)
+    
     }
-    else{
+    else {
       alert("form data is incorrect")
     }
 
-    
+
+
   }
 
   return (
@@ -138,26 +205,30 @@ function validateCountry(country){
               <option value="RUSSIA">RUSSIA</option>
             </select>
           </div>
-          {/* <div className='radio-wrapper'>
+          <div className='radio-wrapper'>
           <label htmlFor="gender">Gender</label>
-          <input type='radio' name='gender' id='male' onChange={handelChange}/>
+          <input type='radio' name='gender' id='male' value={"male"} onChange={(event)=>setgender(event.target.value)}/>
           <label  htmlFor='male'>Male</label>
-          <input type='radio' name='gender' id='female' onChange={handelChange}/>
+          <input type='radio' name='gender' id='female' value={"female"} onChange={(event)=>setgender(event.target.value)}/>
           <label  htmlFor='female'>Female</label>
          </div>
+          
          <div className='check-box-warpper'>
-          <label className='check-box-heading'>Education</label>
-          <label htmlFor="highersecondary">HigherSecondry</label>
-          <input type="checkbox" name='education' id='highersecondary' onChange={handelChange}/>
-          <label htmlFor="graduated">graduated</label>
-          <input type="checkbox" name='education ' id='graduated' onChange={handelChange}/>
-         </div> */}
+          <label className='check-box-heading'>Skills</label>
+          <label htmlFor="Python">Python</label>
+          <input type="checkbox" name='Skills' id='Python' value={"python"}   onChange={handelChange}/>
+          <label htmlFor="Javascript">Javascript</label>
+          <input type="checkbox" name='Skills' id='Javascript'value={"javascript"}  onChange={handelChange}/>
+          <label htmlFor="C++">C++</label>
+          <input type="checkbox" name='Skills' id='C++'  value={"c++"} onChange={handelChange}/>
+         </div>
           <button className='submit-btn' type="submit">submit</button>
         </section>
-
       </form>
     </>
   )
 }
 
-export default App
+
+
+export default App;
