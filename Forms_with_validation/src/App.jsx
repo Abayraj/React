@@ -45,7 +45,7 @@ function App() {
   const [genderError,setgenderError] = useState('');
   const [skillsError,setSkillsError] = useState('');  
 
-
+//controlled form validation
 
 //Function to validate skills 
  
@@ -98,20 +98,21 @@ function validateSkills(checkedSkills) {
 
   function validateUserName(userName) {
     let isUserNameValid = true;
-    const nameRegex = /^[a-zA-Z\-]+$/;;
+    const nameRegex = /^[a-zA-Z0-9]+$/;
     setUserNameError('');
+    if (userName === "") {
+      setUserNameError('username is required');
+      isUserNameValid = false;
+      return isUserNameValid;
+    }
+
     if (!nameRegex.test(userName)) {
       setUserNameError('username can not contain special characters')
       isUserNameValid = false;
       return isUserNameValid;
     }
-    if (userName === "") {
-      setUserNameError('username is required');
-      isUserNameValid = false;
-      return isUserNameValid;
-
-    }
     return isUserNameValid;
+   
   }
 
   //function  to validate Email
@@ -191,10 +192,12 @@ function validateSkills(checkedSkills) {
             <label htmlFor="name">Name</label>
             <input className='input-filed' type="text" name='firstname' id='name' onChange={(event) => setUserName(event.target.value)} />
           </div>
+          {userNameError && <p className='error'>{userNameError}</p>}
           <div>
             <label htmlFor="email">Email</label>
             <input className='input-filed' type="email" name="email" id="email" onBlur={(event) => setEmail(event.target.value)} />
           </div>
+          {emailError && <p className='error'>{emailError}</p>}
           <div>
             <label htmlFor="country">Select Country</label>
             <select className='select-country-box' name='country' onChange={(event) => setcountry(event.target.value)}>
@@ -205,6 +208,7 @@ function validateSkills(checkedSkills) {
               <option value="RUSSIA">RUSSIA</option>
             </select>
           </div>
+          {countryError && <p className='error'>{countryError}</p>}
           <div className='radio-wrapper'>
           <label htmlFor="gender">Gender</label>
           <input type='radio' name='gender' id='male' value={"male"} onChange={(event)=>setgender(event.target.value)}/>
@@ -212,7 +216,7 @@ function validateSkills(checkedSkills) {
           <input type='radio' name='gender' id='female' value={"female"} onChange={(event)=>setgender(event.target.value)}/>
           <label  htmlFor='female'>Female</label>
          </div>
-          
+         {genderError && <p className='error'>{genderError}</p>}
          <div className='check-box-warpper'>
           <label className='check-box-heading'>Skills</label>
           <label htmlFor="Python">Python</label>
@@ -222,6 +226,8 @@ function validateSkills(checkedSkills) {
           <label htmlFor="C++">C++</label>
           <input type="checkbox" name='Skills' id='C++'  value={"c++"} onChange={handelChange}/>
          </div>
+         {skillsError && <p className='error'>{skillsError}</p>}
+        
           <button className='submit-btn' type="submit">submit</button>
         </section>
       </form>

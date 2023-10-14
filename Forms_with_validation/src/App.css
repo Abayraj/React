@@ -8,6 +8,15 @@
   transform: translate(200px);
 }
 
+.error{
+  color: red;
+  font-size: 10px;
+
+  margin-top: 1px;
+  
+
+}
+
 .main-form{
     display: flex;
     align-items: center;
@@ -29,8 +38,8 @@
   padding-right:12px;
 }
 .input-filed{
-  padding: 5px;
-  margin: 10px;
+  padding: 4px;
+  margin: 5px;
     border: 2px solid #32373b; /* Border color */
     border-radius: 5px;
     width: 220px;
