@@ -36,8 +36,6 @@ function App() {
 
   
 
-  
-
   //states to check the validation error
   const [userNameError, setUserNameError] = useState('');
   const [emailError, setEmailError] = useState('');

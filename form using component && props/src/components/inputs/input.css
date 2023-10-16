@@ -1,0 +1,26 @@
+.input-section{
+height: 100vh;    
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+.input-section input{
+    border: none;
+    border-bottom: 1px solid white;
+    margin-left: 20px;
+    outline: none;
+    
+}
+.input-section button{
+    margin-left: 20px;
+    background-color: burlywood;
+
+
+}
+
+*{
+    color: white;
+    font-family: monospace;
+    background-color: black;
+}
