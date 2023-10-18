@@ -104,8 +104,7 @@ function App() {
           lable="firstName"
           id="name"
           name="firstName"
-          type="text" 
-          value={fields.firstName}
+          type="text"
           handelchange={handleChange}
           />
 

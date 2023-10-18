@@ -8,7 +8,7 @@ export const Textinputs = ({handelchange,errorFileds,lable,id,name,type,value}) 
         <>
             <div>
                 <label htmlFor={id}>{lable}</label>
-                <input id={id} name={name} type={type} onChange={handelchange} value={value}/>
+                <input id={id} name={name} type={type} onChange={handelchange} />
                 {errorFileds.firstName && <span> is required</span>}
             </div>
         </>
