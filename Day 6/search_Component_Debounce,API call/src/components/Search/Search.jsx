@@ -57,7 +57,7 @@ export const Search = () => {
             <h1>Looking for a movie?</h1>
         </div>
 
-        <SearchInput  setSearchInputValue={SearchInputValue} handelChange={handelChange}/>
+        <SearchInput   handelChange={handelChange}/>
         <SearchList SearchLists={filterdList} />
 
     </div>
