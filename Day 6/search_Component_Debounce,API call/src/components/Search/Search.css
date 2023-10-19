@@ -1,0 +1,21 @@
+.search-container{
+    max-width: 600px;
+    width: 100%;
+}
+
+.search-container .heading-section{
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.search-container .heading-section h1{
+ color: rgba(255, 255, 255, 0.619);
+ text-align: left;
+ font-size: 25px;
+}
+
+.search-container .heading-section img{
+    margin-right:20px ;
+}
+
