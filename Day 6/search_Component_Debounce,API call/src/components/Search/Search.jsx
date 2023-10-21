@@ -13,39 +13,71 @@ const API_URL ="https://api.themoviedb.org/3/search/movie?api_key=d3449ff6ec0c02
 export const Search = () => {
   const [SearchInputValue, setSearchInputValue] = useState("");
   const [SearchLists,setSearchList] = useState([]); //Defalut API DATA
-  const [filterdList,setFilteredList] = useState([]);
+  // const [filterdList,setFilteredList] = useState([]);
 
 
   const handelChange = (event) =>{
     setSearchInputValue(event.target.value);
-    const newFilteredItems = SearchLists.filter(data=>{
-      return data.title.toLowerCase().includes(event.target.value.toLowerCase())
-    });
-    setFilteredList(newFilteredItems);
+    // const newFilteredItems = SearchLists.filter(data=>{
+    //   return data.title.toLowerCase().includes(event.target.value.toLowerCase())
+    // });
+                   //query passing
+    // fetchMovieList(event.target.value);
+    // setFilteredList(newFilteredItems);
 
   };
 
+  const clearSearch =() =>{
+    setSearchInputValue("");
+    // setFilteredList([]);
+    setSearchList([]);
+  }
+                                 //also we can pass query here to query but using useEffect logic is also best
   const fetchMovieList = async () =>{
     // const  response = axios(`${API_URL}&query=${setSearchInputValue}`);
-    const  response = await axios(API_URL,{
-      params:{
-        query:"movie",
-      },
-      
-    });
 
-    setSearchList(response.data.results)
-    setFilteredList(response.data.results)
+    try{
+      const  response = await axios(API_URL,{
+        params:{
+          query:SearchInputValue,
+        },
+        
+      });
+      setSearchList(response.data.results);
+
+    }
+    catch(error){
+      console.log(error)
+
+    }
+ 
+
+   
+    // setFilteredList(response.data.results)
   };
+//  console.log(filterdList,"===filtered list")
 
 
   useEffect(()=>{
 
-    fetchMovieList()
+    // fetchMovieList()
+
+    const timeout = setTimeout(()=>{
+      if(setSearchInputValue){
+        fetchMovieList();
+      }
+    },500);
+    console.log("Mount");
+
+    return()=>{
+      clearTimeout(timeout);
+      console.log("unMount")
+
+    }
 
 
 
-  },[])
+  },[SearchInputValue])
 
 
 
@@ -57,8 +89,9 @@ export const Search = () => {
             <h1>Looking for a movie?</h1>
         </div>
 
-        <SearchInput   handelChange={handelChange}/>
-        <SearchList SearchLists={filterdList} />
+        <SearchInput  SearchInputValue={SearchInputValue}  handelChange={handelChange} clearSearch={clearSearch}/>
+        {/* <SearchList SearchLists={filterdList} /> */}
+        <SearchList SearchLists={SearchLists}/>
 
     </div>
   )
