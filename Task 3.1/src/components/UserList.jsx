@@ -7,7 +7,7 @@ export default function UserList({ users,setUsers}) {
 
 const handleClick = (id) =>{
   console.log("handelcliked called")
-  setUsers(prev=>(prev.filter(user=>(user.id!=id))))
+  setUsers(prev=>(prev.filter(user=> user.id!=id )))
   
 };
   
@@ -21,7 +21,6 @@ const handleClick = (id) =>{
              <span>{data.firstName}</span>
              <button onClick={()=>(handleClick(data.id))}>delete</button>
           </div>
-         
         ))}
         <div>
         </div>
