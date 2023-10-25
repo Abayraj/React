@@ -1,19 +1,31 @@
 import { useState } from 'react'
 import './App.css'
-import Todoinput from './components/input/input'
+
+//custom components
+import { CustomForm } from './components/CustomForm'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [tasks,setTask] = useState([]);
+
+
+  const addTask = (task) =>{
+    setTask(prevValue => [...prevValue,task])
+   
+
+  }
 
   return (
-    <>
+    <div className='container'>
+      <header>
+        <h1>My Task List</h1>
+      </header>
+      <CustomForm addTask={addTask}/>
+    </div>
 
-    <Todoinput/>
 
-   
-    </>
+
   )
 }
 
 export default App
- 
