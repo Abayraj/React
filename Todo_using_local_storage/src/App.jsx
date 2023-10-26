@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 //custom components
@@ -7,12 +7,12 @@ import { TaskList } from './components/TaksList';
 
 function App() {
 
-  const [tasks, setTask] = useState([]);
+  const [tasksCurrent, setTask] = useState([]);
 
 
 
   const  deleteTask =(id)=>{
-    setTask(prev => prev.filter(task=>(task.id!==id)));
+    // setTask(prev => prev.filter(task=>(task.id!==id)));
 
 }
 // const toggleTask = (id) =>{
@@ -21,15 +21,29 @@ function App() {
 //   //if id not match it will return the orginal object
 
 // }
-
+ 
 
 //passing an object with some values from coustom form
   const addTask = (task) => {
-    setTask(prevValue => [...prevValue, task])
-
-
+  const updatedTodo = [...tasksCurrent,task]
+  setTask(updatedTodo);
+    let localStorageValue = localStorage.setItem("values", JSON.stringify(updatedTodo))
+   
 
   }
+ 
+ 
+ 
+
+  useEffect(()=>{
+    let getlocalData = JSON.parse(localStorage.getItem("values"));
+    setTask(getlocalData);
+
+    // console.log(typeof(getlocalData))   
+},[])
+// console.log(tasksCurrent)
+
+// console.log(typeof(tasksCurrent),"==taskcurrent")
 
   return (
     <div className='container'>
@@ -38,10 +52,10 @@ function App() {
       </header>
 
       <CustomForm addTask={addTask} />
-      {tasks && (
+      {tasksCurrent && (
 
       <TaskList 
-      tasks={tasks}
+      tasksCurrent={tasksCurrent}
       deleteTask={deleteTask}
       // toggleTask={toggleTask}
    
@@ -54,4 +68,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
