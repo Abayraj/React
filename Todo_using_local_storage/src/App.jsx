@@ -4,17 +4,25 @@ import './App.css'
 //custom components
 import { CustomForm } from './components/CustomForm'
 import { TaskList } from './components/TaksList';
+import EditForm from './components/EditForm';
 
 function App() {
 
   const [tasksCurrent, setTask] = useState([]);
-
+  const [editedTask, setEditedTask] = useState(null);
+  
+  const updateTask = (updatetask)=>{
+    const deletedArrayValues = setTask(prev => prev.map(task=>(task.id!==updatetask.id)));
+    localStorage.setItem("values",JSON.stringify(deletedArrayValues));
+ 
+ };
 
 
   const  deleteTask =(id)=>{
-    // setTask(prev => prev.filter(task=>(task.id!==id)));
+   const deletedArrayValues = setTask(prev => prev.filter(task=>(task.id!==id)));
+   localStorage.setItem("values",JSON.stringify(deletedArrayValues));
 
-}
+};
 // const toggleTask = (id) =>{
 //   setTask(prev=> prev.map(task =>(task.id===id ? {...task,checked:!task.checked} :{task})))
 //   //if it false it make it true if it true it make it false vice versa
@@ -36,8 +44,13 @@ function App() {
  
 
   useEffect(()=>{
-    let getlocalData = JSON.parse(localStorage.getItem("values"));
-    setTask(getlocalData);
+    if(tasksCurrent.length>0){
+      let getlocalData = JSON.parse(localStorage.getItem("values"));
+      setTask(getlocalData);
+
+    }
+
+ 
 
     // console.log(typeof(getlocalData))   
 },[])
@@ -50,6 +63,8 @@ function App() {
       <header>
         <h1>My Task List</h1>
       </header>
+      <EditForm editedTask={editedTask} updateTask={updateTask}/>
+
 
       <CustomForm addTask={addTask} />
       {tasksCurrent && (
