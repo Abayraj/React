@@ -1,24 +1,33 @@
 import React, { useState } from 'react'
-const EditForm = ({editedTask,updateTask}) => {
+
+//libary import icons
+import { PlusIcon } from '@heroicons/react/24/solid'
+import "./CustomForm.css"
+
+
+ const EditForm = ({editedTask,updateTask}) => {
+    
+
+
+
+  
+    console.log(editedTask.name,"edited task")
+
+    
+    // console.log(TaskValues,"task values")
 
     const [updatedTaskName,setUpdatedTaskName] = useState(editedTask.name);
-
+    const [NewupdatedTask,setUpdatedTask] = useState(editedTask);
+    
 
     const handelFormSubmit = (event) => {
         event.preventDefault();
-        // updateTask()
-
-        setTask("")
+        setUpdatedTask(prev=>({...prev,name:updatedTaskName}))
+        updateTask(NewupdatedTask);
+        // setUpdatedTaskName("")
       
     }
     return (
-
-        <>
-        <div 
-        role='dialoge' 
-         aria-labelledby='editTask'
-        //  onClick={}
-         >
         <form className='todo'
             onSubmit={handelFormSubmit}
         >
@@ -28,7 +37,7 @@ const EditForm = ({editedTask,updateTask}) => {
                     id="editTask"
                     className="input"
                     value={updatedTaskName}
-                    onInput={(event) => setUpdatedTaskName(event.target.value)}
+                    onChange={(event) => setUpdatedTaskName((event.target.value))}
                     required
                     autoFocus
                     maxLength={60}
@@ -37,22 +46,18 @@ const EditForm = ({editedTask,updateTask}) => {
                 <label
                     htmlFor="editTask"
                     className="lable"
-                >Update Task</label>
+                ></label>
             </div>
             <button className='btn'
-                aria-label={`confirm edit task to now read ${updatedTaskName}`}
+                aria-label="Add Task"
                 type="submit"
-            >✔
+            >Update Task
              </button>
 
-        </form>
 
-        </div>
-        </>
-        
-       
+        </form>
     )
 }
 
-
 export default EditForm;
+

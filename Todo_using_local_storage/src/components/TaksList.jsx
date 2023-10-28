@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskItem from './TaskItem';
 
-export const TaskList =({tasksCurrent,deleteTask}) =>{
+export const TaskList =({tasksCurrent,deleteTask ,enterEditMode}) =>{
     // console.log(typeof(tasksCurrent) )
     return (
        <ul className='ul-list'>
@@ -11,7 +11,8 @@ export const TaskList =({tasksCurrent,deleteTask}) =>{
                 key={task.id}
                 task={task}
                 deleteTask={deleteTask}
-                // toggleTask={toggleTask}
+                enterEditMode={enterEditMode}
+               
                 />
             ))
         }

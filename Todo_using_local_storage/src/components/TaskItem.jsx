@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import './TaskItem.css'; // Import the CSS file
 
-export default function TaskItem({task,deleteTask}) {
+export default function TaskItem({task,deleteTask,enterEditMode}) {
     const [isChecked,setIsChecked] = useState(task.checked);
 
 
     const handelCheckboxChange=()=>{
         setIsChecked(!isChecked);
-        toggleTask(task.id)
+        // toggleTask(task.id)
     }
     const textDecoration = isChecked ? 'underline-text' : 'no-decoration-text';
 
@@ -32,9 +32,11 @@ export default function TaskItem({task,deleteTask}) {
            </p>
             </label>
         </div>
+        
         <div className='task-btn'>
             <button 
              className='btn-task'
+             onClick={()=> enterEditMode(task)}
              aria-label={`Update${task.name} Task`}
              >
                 ✏
