@@ -9,7 +9,8 @@ export default function TaskItem({task,deleteTask,enterEditMode}) {
         setIsChecked(!isChecked);
         // toggleTask(task.id)
     }
-    const textDecoration = isChecked ? 'underline-text' : 'no-decoration-text';
+
+     const textDecoration = isChecked ? 'underline-text' : 'no-decoration-text';
 
 
   return (
