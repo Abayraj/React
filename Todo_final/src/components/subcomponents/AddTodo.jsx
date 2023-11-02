@@ -6,11 +6,11 @@ const  AddTodo = ({addTodo, handelInputChange, value, error}) => {
       <div className='input-add'>
         <input type="text" 
         name='todo'
-        placeholder='Enter todo...'
+        placeholder='New todo...'
         value={value}
         onChange={handelInputChange}
         />
-        <button onClick={addTodo}>Add Todo</button>
+        <button className='all-btn' onClick={addTodo}>Add Todo</button>
       </div>
       {error && <p className='error'>*please enter your todo</p>}
 

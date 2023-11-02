@@ -6,15 +6,15 @@ const  EditTodo = ({editTodo:{title,id},setEditTodo,handelEdit}) => {
   return (
     <div className='edit-todo-wrapper'>
         <h3>Edit Todo</h3>
-        <div className='edit-todo-item'>
+        <div className='edit-todo-items'>
             <input type="text" 
             name="todo"
             value={todo}
             onChange={(event)=>setTodo(event.target.value)}
             />
             <div className='btns'>
-                <button className='btn-cancel' onClick={()=>setEditTodo("")} >Cancel</button>
-                <button className='btn-save' onClick={()=> handelEdit(id,todo)}>save</button>
+                <button className='all-btn' onClick={()=>setEditTodo("")} >Cancel</button>
+                <button className='all-btn' onClick={()=> handelEdit(id,todo)}>save</button>
             </div>
 
         </div>

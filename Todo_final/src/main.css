@@ -1,6 +1,7 @@
 *{
   margin: 0;
   box-sizing: border-box;
+  color:  #8FA8C1;
 }
 
 #root {
@@ -12,11 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-   background: linear-gradient(0deg, #152431, #152431),
-  conic-gradient(from 180deg at 50% 50%, #8FA8C1 0deg, rgba(143, 168, 193, 0) 360deg);
-  ;
-
-
+  background: rgb(34, 33, 33);
 }
 
 
