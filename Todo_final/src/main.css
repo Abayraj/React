@@ -1,0 +1,22 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   background: linear-gradient(0deg, #152431, #152431),
+  conic-gradient(from 180deg at 50% 50%, #8FA8C1 0deg, rgba(143, 168, 193, 0) 360deg);
+  ;
+
+
+}
+
+

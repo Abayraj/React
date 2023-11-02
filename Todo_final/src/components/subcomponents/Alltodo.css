@@ -1,0 +1,11 @@
+
+.all-todo-wrappper .title{
+    word-break: break-all;
+    color: #d29d16;
+  }
+
+.all-todo-wrappper .line-through{
+    text-decoration:line-through;
+    color: rgb(121, 88, 45);
+
+}
