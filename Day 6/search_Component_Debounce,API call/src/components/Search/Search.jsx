@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SearchInput } from './SearchInput/SearchInput'
 import "./Search.css"
 import { SearchList } from './SearchList/SearchList'
 import axios from 'axios';
+import { NamePass } from '../../context/NamePass';
+import { TestContext } from '../../context/TestContext';
+import { AnotherMessage} from '../../context/anotherMessage';
 
 //Steps
 // 1. Fetch API => Filter locally
@@ -10,10 +13,17 @@ import axios from 'axios';
 
 const API_URL ="https://api.themoviedb.org/3/search/movie?api_key=d3449ff6ec0c027623bf6b6f5fff78b3&language=en-US&page=1&include_adult=false";
 
-export const Search = () => {
+export const Search = ({auth,Welcomebtn}) => {
   const [SearchInputValue, setSearchInputValue] = useState("");
   const [SearchLists,setSearchList] = useState([]); //Defalut API DATA
   // const [filterdList,setFilteredList] = useState([]);
+  const {name}  = useContext(NamePass);
+  const {message} = useContext(TestContext);
+  const {OtherMessage} =  useContext(AnotherMessage);
+
+ 
+
+  
 
 
   const handelChange = (event) =>{
@@ -80,21 +90,25 @@ export const Search = () => {
   },[SearchInputValue])
 
 
-
-
+ 
   return (
     <div className='search-container'>
         <div className="heading-section">
             <img src="src/assets/Images/Icons/pngtree-search-icon-image_1344447.jpg" alt="" width='20' height='20px'  />  
             <h1>Looking for a movie?</h1>
+            <h2 style={{color:"white"}}>{message}</h2>
+            <h1 style={{marginLeft:"20px"}}>{name}</h1>
         </div>
 
-        <SearchInput  SearchInputValue={SearchInputValue}  handelChange={handelChange} clearSearch={clearSearch}/>
+        <SearchInput  SearchInputValue={SearchInputValue}  handelChange={handelChange} clearSearch={clearSearch} auth={auth} Welcomebtn={Welcomebtn} />
         {/* <SearchList SearchLists={filterdList} /> */}
-        <SearchList SearchLists={SearchLists}/>
+        <SearchList SearchLists={SearchLists} />
+      <h3 style={{color:"white"}}>{OtherMessage}</h3>
 
     </div>
+    
   )
 }
+
 
 

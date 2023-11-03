@@ -3,11 +3,16 @@ import { Search } from './components/Search/Search'
 import '../styles/global.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  //without contex api example this is called prop drilling like it gose down to components it creats a tree and it's hard to manage
+  const [auth,setauth] = useState(false);
+  const Welcomebtn = () =>{
+  setauth(prev=> !prev);
+  }
 
   return (
-    <Search />
+    <Search auth={auth} Welcomebtn={Welcomebtn}/>
   )
 }
 
-export default App
+export default App;
