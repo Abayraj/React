@@ -2,7 +2,7 @@
  background-color: 
 #152431;
 width: 550px;
-height: 550px;
+height: 750px;
 border-radius: 10px;
 box-shadow: 40px 40px 15px  #0000004D;
 }
@@ -68,6 +68,8 @@ input{
 }
 .all-todo-wrappper{
   margin: 25px;
+  overflow-y: scroll;
+  height: 60%;
 }
 .edit-todo-items{
   display: flex;
