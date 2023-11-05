@@ -11,8 +11,9 @@ export const Counter = () => {
         <h1>count{state.count}</h1>
         <button className='btn' onClick={()=> dispatch({type:"increment"})}>Increment</button>
         <button className='btn' onClick={()=> dispatch({type:"decrement"})} >decrement</button>
-        <button className='btn' onClick={()=> dispatch({type:"increment_by"}) }>Increment by{state.count}</button>
-        <button className='btn' onClick={()=> dispatch({type:"decrement_by"})}>decrement by{state.count}</button>
+        <button className='btn' onClick={()=> dispatch({type:"decrement_by",payload:{count:5,},}) }>decrement by{state.count}</button>
+        <button className='btn' onClick={()=> dispatch({type:"increment_by",payload:10})}>on increment by</button>
+        <button className='btn' onClick={()=> dispatch({type:"reset_by"})}>reset by to 0 {state.count}</button>
     </div>
   )
 };

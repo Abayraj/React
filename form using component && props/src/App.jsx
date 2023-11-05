@@ -1,15 +1,22 @@
-import { useState } from 'react'
+import { useState,useRef } from 'react'
 
 
 import { Textinputs } from "./components/inputs/inputs"
+import { userHandleChange } from './hooks/useHandleChange';
 
 function App() {
   // This is for handling any number of inputs fields
   // The key should match the name attribute of the html
-  const [fields, setFields] = useState({
-    firstName: "",
-  });
- console
+  // const [fields, setFields] = useState({
+  //   firstName: "",
+  //   email:""
+  // });
+  
+
+  //useRef 
+  const inputRef = useRef(null);
+  const counterRef = useRef(0);
+
 
   const [errorFields, setErrorFields] = useState({
     firstName: false,
@@ -28,13 +35,27 @@ function App() {
     console.log("InValid");
   }; 
 
-  // This is for handling any number of inputs fields
-  const handleChange = (event) => {
-    setFields((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
+  // This is for handling any number of inputs fields 
+  //we can creat this using coustom hook  hook will use to reuse the method or logic
+  // const handleChange = (event) => {
+  //   setFields((prev) => ({
+  //     ...prev,
+  //     [event.target.name]: event.target.value,
+  //   }));
+ 
+  // };
+
+  //custom hook
+  const {state:fields,handleChange:customHandelChange} = userHandleChange({
+    firstName:"",
+    email:"",
+  });
+
+  const handleChange =  (event) =>{
+    customHandelChange(event)
+
   };
+ 
 
 
   //   Solution 1
@@ -78,7 +99,7 @@ function App() {
 
 
   };
-
+console.log(fields.email)
   // const isFormValidOnBlur = (event) => {
   //   const { name, value } = event.target;
   //   let error = false;
@@ -92,11 +113,24 @@ function App() {
   //   [name]: error,
   // }));
   // };
+const incrementCounter = () =>{
 
+  counterRef.current++;
+  console.log(counterRef);
+
+  //useRef  will not re render but if we do the same with state it will re render when the dom change
+
+}
 
 
   return (
-    <>
+  <>
+ 
+  <input type="text" ref={inputRef} />
+  {/* {it will able to focus the input box we can use useRef for doing dom related things } */}
+  <button onClick={()=> console.log(inputRef.current.focus())}> show ref</button>
+  <button onClick={incrementCounter}>counter increament</button>
+    
 
       <form onSubmit={handleSubmit} className='input-section'>
         <Textinputs
@@ -105,6 +139,7 @@ function App() {
           id="name"
           name="firstName"
           type="text"
+          email="email"
           handelchange={handleChange}
           />
 
@@ -119,4 +154,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
