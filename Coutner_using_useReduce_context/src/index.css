@@ -1,0 +1,17 @@
+*{
+color: white;
+background-color:rgb(36, 34, 32);
+}
+
+
+.counter-wrapper{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.btn{
+  padding: 10px;
+  background-color: chocolate;
+  }
