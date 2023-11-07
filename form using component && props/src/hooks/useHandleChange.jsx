@@ -5,7 +5,7 @@ export const userHandleChange= (initial) =>{
     const [state, setState] = useState(initial);
 
 
-    const handleChange = (event) => {
+    const handleChange = (event) => { 
         setState((prev) => ({
           ...prev,
           [event.target.name]: event.target.value,

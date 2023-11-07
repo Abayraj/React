@@ -36,7 +36,7 @@ function App() {
           {/* {protocted route logic need to wrap it inside Route tag it will verfiy what happening inside protectedRoute then only
           go to inside Route wrapped elements
           } */}
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute/>}>
           <Route path="/product" element={<Product/>}/>
           <Route path="/product/:id" element={<Product/>}/>
           </Route>
