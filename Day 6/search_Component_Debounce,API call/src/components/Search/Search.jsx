@@ -12,7 +12,7 @@ import { AnotherMessage } from '../../context/anotherMessage';
 // 2. Fetch API => Filter through API
 
 // const API_URL ="https://api.themoviedb.org/3/search/movie?api_key=d3449ff6ec0c027623bf6b6f5fff78b3&language=en-US&page=1&include_adult=false";
-const API_URL = "http://localhost:5500/";
+const API_URL = "http://localhost:5500/api/movies";
 
 export const Search = ({ auth, Welcomebtn }) => {
   const [SearchInputValue, setSearchInputValue] = useState("");
@@ -21,11 +21,6 @@ export const Search = ({ auth, Welcomebtn }) => {
   const { name } = useContext(NamePass);
   const { message } = useContext(TestContext);
   const { OtherMessage } = useContext(AnotherMessage);
-
-
-
-
-
 
   const handelChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -46,15 +41,14 @@ export const Search = ({ auth, Welcomebtn }) => {
   //also we can pass query here to query but using useEffect logic is also best
   const fetchMovieList = async () => {
     // const  response = axios(`${API_URL}&query=${setSearchInputValue}`);
-
     try {
-      const response = await axios(API_URL);
-      // ,{
-      // params:{
-      //   query:SearchInputValue,
-      // },
+      const response = await axios(API_URL, {
+        params: {
+          movieName: SearchInputValue,
+        },
 
-      // });
+      });
+
       console.log(response.data, "results")
       setSearchList(response.data);
 
@@ -63,34 +57,59 @@ export const Search = ({ auth, Welcomebtn }) => {
       console.log(error)
 
     }
+  }
 
+  //   // setFilteredList(response.data.results)
+  // };
+  // //  console.log(filterdList,"===filtered list")
 
-
-    // setFilteredList(response.data.results)
+  const submitMovie = async () => {
+    // const  response = axios(`${API_URL}&query=${setSearchInputValue}`);
+    try {
+      const response = await axios(API_URL, {
+        method: "POST",
+        data: {
+          movieName: SearchInputValue,
+        },
+      });
+      setSearchList(response.data);
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
-  //  console.log(filterdList,"===filtered list")
+
+  //passing data in the body
+  const deleteMovie = async ()=>{
+    try{
+      const response = await axios.delete(API_URL,{
+        method:"DELETE",
+        data:{
+          movieName:SearchInputValue,
+        },
+      });
+      setSearchList(response.data);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
 
 
 
   useEffect(() => {
-
     // fetchMovieList()
-
     const timeout = setTimeout(() => {
       if (setSearchInputValue) {
         fetchMovieList();
       }
     }, 500);
     console.log("Mount");
-
     return () => {
       clearTimeout(timeout);
-      console.log("unMount")
-
+      console.log("unMount");
     }
-
-
-
   }, [SearchInputValue])
 
 
@@ -105,14 +124,18 @@ export const Search = ({ auth, Welcomebtn }) => {
       </div>
 
       <SearchInput SearchInputValue={SearchInputValue} handelChange={handelChange} clearSearch={clearSearch} auth={auth} Welcomebtn={Welcomebtn} />
+      <button onClick={submitMovie}>Submit</button>
+      <button onClick={deleteMovie}>Delete</button>
       {/* <SearchList SearchLists={filterdList} /> */}
       <SearchList SearchLists={SearchLists} />
       <h3 style={{ color: "white" }}>{OtherMessage}</h3>
 
+
     </div>
 
   )
-}
 
+
+}
 
 
